@@ -1,10 +1,12 @@
 
+import Footer from './Compontents/Footer'
+
 import './App.css'
 
 function App() {
   return (
     <>
-   lms
+    <Footer/>
     </>
   )
 }
