@@ -11,7 +11,7 @@ const cookieOptions={
 const register=async(req,res,next)=>{
     const {fullName, email, password}= req.body;
 
-    if(!password||!email||!fullName){
+    if(!fullName|| !email|| !password){
         return next(new AppError('All fileds are  required ', 400));
     }
 
@@ -25,47 +25,52 @@ const register=async(req,res,next)=>{
         password,
         avatar:{
             public_id:email,
-            secure_url:''
+            secure_url:'https://res.cloudinary.com/du9jzqlpt/image/upload/v1674647316/avatar_drzgxv.jpg',
         }
          
     });
 
     if(!user){
-        return next(new AppError('User registration failed please try again ', 400));
+        return next(
+            new AppError('User registration failed please try again ', 400)
+        );
     }
 
     //todo:file uplod
 
     await user.save();
 
+    const token = await user.generateJWTToken()
+
     user.password= undefined;
 
-    const token = await user.generateJWTToken();
     res.cookie('token', token, cookieOptions)
 
     res.status(201).json({
         suceess:true,
-        message:'User regidtered sucessfully',
+        message:'User registered sucessfully',
         user,
     });
 };
 
-const login=async (req,res)=>{
+const login=async (req,res,next)=>{
 
     try {
 
         const {email, password}= req.body;
 
         if(!email||!password){
-            return next(new AppError('All fileds are required ', 400));
+            return next(new AppError('Email and Password are required ', 400));
         }
     
         const user= await User.findOne({
             email
         }).select('+password');
     
-        if(!user || !user.comparePassword(password)){
-            return next(new AppError('Email or password does not match ', 400));
+        if(!(user &&(await user.comparePassword(password)))){
+            return next(
+                new AppError('Email or password does not match ', 400)
+            );
         }
     
         const token = await user.generateJWTToken();
@@ -77,12 +82,13 @@ const login=async (req,res)=>{
     
         res.status(200).json({
             suceess: true,
-            message:'User loggedin Successfully',
+            message:'User logged in Successfully',
             user,
         })
         
     } catch (e) {
-       return next(new AppError(e.message, 500));
+       return next(new
+         AppError(e.message, 500));
     }
 
    
@@ -102,7 +108,7 @@ const logout=(req,res)=>{
     })
 };
 
-const getProfile=async (req,res)=>{
+const getProfile=async (req,res, next)=>{
     try {
         const userId = req.user.id;
         const user = await User.findById(userId);

@@ -17,10 +17,10 @@ const userSchema= new Schema({
         lowercase:true,
         trim:true,
         unique:true,
-        match:[
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-            'Please fill in a valid email address '
-        ]
+        match: [
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            'Please fill in a valid email address',
+          ],
     },
     password:{
         type: 'String',
@@ -55,21 +55,22 @@ userSchema.pre('save', async function(next){
 
 })
 
-userSchema.method={
-    generateJWTToken: async function (){
-        return await jwt.sign(
-            {id:this_id,email:this.email, subscription:this.subscription},
-            process.env.JWT_SECRET,
-            {
-                expiresIn:process.env.JWT_EXPIRY,
-            }
-
-        )
+userSchema.methods = {
+  
+    comparePassword: async function (plainPassword) {
+      return await bcrypt.compare(plainPassword, this.password);
     },
-    comparePassword:async function(plaintextpassword){
-        return  await bcrypt.compare(plaintextpassword,this.password)
-
-    }
+  
+    // Will generate a JWT token with user id as payload
+    generateJWTToken: async function () {
+      return await jwt.sign(
+        { id: this._id, role: this.role, subscription: this.subscription },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: process.env.JWT_EXPIRY,
+        }
+      );
+    },
 }
 
 const User =model('User', userSchema);
