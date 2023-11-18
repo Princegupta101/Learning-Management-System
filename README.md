@@ -6,7 +6,7 @@
 git@github.com:Princegupta101/Larning-Management-System.git
 ```
 
-### Setup instruction 
+### Setup instruction  for Frontend
 
 
 1. Move into the directory
