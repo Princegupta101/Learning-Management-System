@@ -25,3 +25,20 @@ npm install
 npm run dev
 ```
 
+### Setup instruction  for Backend
+
+1. Move into the directory
+
+```bash
+cd Server
+```
+2. install  dependenices
+
+```bash
+npm install
+```
+3.  run the server
+
+```bash
+npm run dev
+```
