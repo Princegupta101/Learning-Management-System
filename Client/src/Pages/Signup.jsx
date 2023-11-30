@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { creatAccount } from "../Redux/Slices/AuthSlice";
 import HomeLayout from "../Layouts/HomeLayout";
 
-function Singup(){
+function Signup(){
 
     const dispatch = useDispatch();
    const navigate = useNavigate();
@@ -99,7 +99,7 @@ function Singup(){
     return(
         <HomeLayout>
                 <div className=" flex items-center justify-center h-[90vh]">
-                    <form  noValidate onSubmit={createNewAccount} className="flex flex-col   justify-center gap-3  rounded-lg text-white p-4 w-96 shadow-[0_0_10px_black] ">
+                    <form  noValidate onSubmit={createNewAccount} className="flex flex-col   justify-center gap-3  rounded-lg text-white p-4 w-80 sm:w-96 shadow-[0_0_10px_black] ">
                         <h1 className="text-center text-2xl font-bold">Registion Page</h1>
                         <label htmlFor="image_uploads" className=" cursor-pointer">
                             {prevImage ? (
@@ -170,4 +170,4 @@ function Singup(){
         </HomeLayout>
     )
 }
-export default Singup;
+export default Signup;
