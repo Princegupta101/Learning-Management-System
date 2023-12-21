@@ -75,7 +75,7 @@ const authSlice = createSlice({
             state.role=action?.payload?.user?.role
 
         })
-        .addCase(logout,fulfilled, (state)=>{
+        .addCase(logout.fulfilled, (state)=>{
             localStorage.clear();
             state.data={};
             state.isLoggedIn=false;

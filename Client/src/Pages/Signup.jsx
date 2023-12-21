@@ -69,11 +69,11 @@ function Signup(){
             return;
         }
 
-        // //checking password
-        // if (!signupData.password.match("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$") ){
-        //     toast.error("Password should be 6-16 character long with atleast a number and spacial character ")
-        //     return;
-        // }
+        //checking password
+        if(!signupData.password.match(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/)) {
+            toast.error("Password should be 6 - 16 character long with atleast a number and special character");
+            return;
+        }
 
         const formData = new FormData();
         formData.append("fullName", signupData.fullName);
