@@ -1,6 +1,5 @@
-import toast from "react-hot-toast";
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 import axiosInstance from "../../Helpers/axiosinstance"
 
@@ -86,5 +85,5 @@ const authSlice = createSlice({
     }
 });
 
-export const { }= authSlice.actions;
+export const {}= authSlice.actions;
 export default authSlice.reducer;
