@@ -1,6 +1,6 @@
 import {AiFillCloseCircle} from 'react-icons/ai';
 import {FiMenu} from 'react-icons/fi';
-import{useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Footer from '../Compontents/Footer.jsx';
@@ -12,7 +12,7 @@ function HomeLayout({ children }) {
     const navigate = useNavigate();
 
     //for checking if user is logged in 
-    const isLoggegIn = useSelector((state)=>state?.auth?.isLoggegIn);
+    const isLoggedIn = useSelector((state)=>state?.auth?.isLoggedIn);
 
     // for displaying the options acc to role
     const role = useSelector((state)=>state?.auth?.role);
@@ -65,11 +65,16 @@ function HomeLayout({ children }) {
                             <Link to="/">Home</Link>
                         </li>
 
-                            {isLoggegIn && role == 'ADMIN' &&(
+                            {isLoggedIn && role == 'ADMIN' &&(
                                 <li>
                                     <Link to="/admin/deshboard">Admin Dashboard</Link>
                                 </li>
                             )}
+                            {isLoggedIn && role === 'ADMIN' && (
+                            <li>
+                                <Link to="/course/create"> Create new course</Link>
+                            </li>
+                        )}
                         <li>
                             <Link to="/courses">All Courses</Link>
                         </li>
@@ -82,7 +87,7 @@ function HomeLayout({ children }) {
                             <Link to="/about">About Us</Link>
                         </li>
 
-                        {!isLoggegIn &&(
+                        {!isLoggedIn &&(
                             <li className=' absolute bottom-4 w-[90%]'>
                                 <div className='w-full flex items-center justify-center'>
                                         <button className='btn-primary  bg-blue-500 px-4 py-1 font-semibold rounded-md w-full '>
@@ -95,7 +100,7 @@ function HomeLayout({ children }) {
                             </li>
                         )}
 
-                        {isLoggegIn &&(
+                        {isLoggedIn &&(
                             <li className=' absolute bottom-4  w-[90%]'>
                                 <div className='w-full flex items-center justify-center'>
                                         <button className='btn-primary  bg-blue-500 px-4 py-1 font-semibold rounded-md w-full '>
