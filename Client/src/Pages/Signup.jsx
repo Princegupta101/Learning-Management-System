@@ -20,7 +20,7 @@ function Signup(){
         fullName:"",
         email:"",
         password:"",
-        avtar:"",
+        avatar:"",
     });
 
     function handleUserInput(e){
@@ -40,7 +40,7 @@ function Signup(){
         if(uploadedImage){
            setSignupData({
                 ...signupData,
-                avtar:uploadedImage
+                avatar:uploadedImage
            });
            const fileReader =new FileReader();
            fileReader.readAsDataURL(uploadedImage);
@@ -53,7 +53,7 @@ function Signup(){
 
    async function createNewAccount(event){
         event.preventDefault();
-        if (!signupData.email ||!signupData.fullName||!signupData.avtar || !signupData.password) {
+        if (!signupData.email ||!signupData.fullName||!signupData.avatar || !signupData.password) {
             toast.error("Please fill all the details ");
             return;
         }
@@ -80,7 +80,7 @@ function Signup(){
         formData.append("fullName", signupData.fullName);
         formData.append("email", signupData.email);
         formData.append("password", signupData.password);
-        formData.append("avtar", signupData.avtar);
+        formData.append("avatar", signupData.avatar);
 
 
         //dispatch create account action
@@ -93,7 +93,7 @@ function Signup(){
             fullName:"",
             email:"",
             password:"",
-            avtar:"",
+            avatar:"",
         })
         setPrevImage("");
     }
