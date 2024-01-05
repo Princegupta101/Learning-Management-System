@@ -1,15 +1,19 @@
-import express from 'express';
-import cors from'cors';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import { config } from 'dotenv';
+import express from 'express';
 import morgan from 'morgan';
-import userRoutes from './routes/user.Routes.js'
+
 import errorMiddlware from './middlewares/error.middleware.js';
+import userRoutes from './routes/user.Routes.js'
+
 config();
 
 const app = express();
 
 app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
     origin:[process.env.FRONTEND_URL],
