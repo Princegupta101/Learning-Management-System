@@ -41,7 +41,6 @@ const register=async(req,res,next)=>{
         );
     }
 
-    console.log( "file Details->",JSON.stringify(req.file));
     if(req.file){
     
         try {

@@ -5,6 +5,7 @@ import express from 'express';
 import morgan from 'morgan';
 
 import errorMiddlware from './middlewares/error.middleware.js';
+import courseRoutes from './routes/course.Routes.js'
 import userRoutes from './routes/user.Routes.js'
 
 config();
@@ -29,6 +30,7 @@ app.use('/ping',function(req,res){
 })
 
 app.use('/api/v1/user', userRoutes)
+app.use('/api/v1/course', courseRoutes)
 
 app.all('*',(req,res)=>{
     res.status(404).send('OOPS!!  404 page not found ')
