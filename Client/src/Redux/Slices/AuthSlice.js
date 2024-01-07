@@ -6,7 +6,7 @@ import axiosInstance from "../../Helpers/axiosinstance"
 const initialState = {
     isLoggedIn : localStorage.getItem('isLoggedIn')|| false,
     role:localStorage.getItem('role')|| "" ,
-    data:localStorage.getItem('data')||{}
+    data:JSON.parse(localStorage.getItem('data'))||{}
 }
 
 export const creatAccount =createAsyncThunk("/auth/singup", async(data)=>{

@@ -14,6 +14,7 @@ import HomePage from './Pages/HomePage.jsx'
 import Login from './Pages/Login.jsx'
 import NotFound from './Pages/NotFound.jsx'
 import Signup from './Pages/Signup.jsx'
+import Profile from './Pages/User/Profile.jsx'
 
 function App() {
   return (
@@ -34,7 +35,11 @@ function App() {
           <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>}>
            <Route path='/course/create' element={<CreateCourse/>}></Route>
           </Route>
-          
+
+          <Route element={<RequireAuth allowedRoles={["ADMIN", 'USER']}/>}>
+          <Route path='/user/profile' element={<Profile/>}></Route> 
+          </Route>
+                  
           <Route path='*' element={<NotFound/>}></Route>
       </Routes>
     </>
