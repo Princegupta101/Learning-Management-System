@@ -1,10 +1,14 @@
 import cloudinary from 'cloudinary'
 import fs from 'fs/promises'
 
+import asyncHandler from '../middlewares/asyncHAndler.middleware.js';
 import Course from "../models/course.model.js"
 import AppError from "../utils/error.util.js";
 
-const getAllCourse = async (req, res, next)=>{
+/**
+ * @ALL_COURSES
+ */
+export const getAllCourse = asyncHandler(async (req, res, next)=>{
     try {
         const courses = await Course.find({}).select('-lectures');
         res.status(200).json({
@@ -19,9 +23,11 @@ const getAllCourse = async (req, res, next)=>{
         )
     }
       
-}
-
-const getLecturesByCourseId = async (req, res, next)=>{
+});
+/**
+ * @GET_LECTURES_BY_COURSE_ID
+ */
+export const getLecturesByCourseId = asyncHandler(async (req, res, next)=>{
     try {
         const {id} = req.params;
 
@@ -45,9 +51,11 @@ const getLecturesByCourseId = async (req, res, next)=>{
             new AppError(e.message,500)
         )
     }
-}
-
-const createCourse = async (req, res, next)=>{
+});
+/**
+ * @CREATE_COURSE
+ */
+export const createCourse = asyncHandler(async (req, res, next)=>{
     const {title, description , category, createdBy}= req.body;
     if(!title||! description ||! category||!createdBy){
         return next(
@@ -96,9 +104,11 @@ const createCourse = async (req, res, next)=>{
    
     } 
     
-}
-
-const updateCourse = async (req, res, next)=>{
+});
+/**
+ * @UPDATE_COURSE_BY_ID
+ */
+export const updateCourse = asyncHandler(async (req, res, next)=>{
     try {
         const {id}= req.params;
 
@@ -126,9 +136,11 @@ const updateCourse = async (req, res, next)=>{
         success:true,
         message:'Course Updated sucesssfully ',
     })
-}
-
-const removeCourse = async (req, res, next)=>{
+});
+/**
+ * @DELETE_COURSE_BY_ID
+ */
+export const removeCourse = asyncHandler(async (req, res, next)=>{
     try {
         const {id }= req.params;
         const course = await  Course.findById(id);
@@ -150,9 +162,11 @@ const removeCourse = async (req, res, next)=>{
             new AppError(error.message, 500)
         )
     }
-}
-
-const addLectureToCourseById= async(req, res, next )=>{
+});
+/**
+ * @ADD_LECTURE
+ */
+export const addLectureToCourseById= asyncHandler(async(req, res, next )=>{
     const { title, description} = req.body;
 
     const {id }= req.params;
@@ -204,18 +218,49 @@ const addLectureToCourseById= async(req, res, next )=>{
    
     } 
 
-}
+});
+/**
+ * @Remove_LECTURE
+ */
+export const removeLecture =asyncHandler( async(req, res, next )=>{
+    try {
+        const courseId = req.params.courseId;
+        const lectureId = req.params.lectureId;
 
-const removeLecture = async(req, res, next )=>{
+        const course = await Course.findById(courseId);
+        if (!course) {
+            return next(new AppError('Course not found', 404));
+        }
 
-}
+        // Find the index of the lecture in the array
+        const lectureIndex = course.lectures.findIndex(
+            (lecture) => lecture._id.toString() === lectureId
+        );
 
-export{
-    getAllCourse,
-    getLecturesByCourseId,
-    createCourse,
-    updateCourse,
-    removeCourse,
-    addLectureToCourseById,
-    removeLecture,
-}
+        if (lectureIndex === -1) {
+            return next(new AppError('Lecture not found', 404));
+        }
+         // Delete the lecture from cloudinary
+        await cloudinary.v2.uploader.destroy(
+            course.lectures[lectureIndex].lecture.public_id,
+            {
+            resource_type: 'video',
+            }
+        );
+        // Remove the lecture from the array
+        course.lectures.splice(lectureIndex, 1);
+        course.numberOfLectures -= 1;
+        
+        await course.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Lecture removed successfully',
+        });
+
+    }catch (error) {
+        return next (
+            new AppError(error.message, 500)
+        )
+    }
+});

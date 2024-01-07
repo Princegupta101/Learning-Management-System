@@ -2,6 +2,7 @@ import cloudinary from "cloudinary"
 import crypto from 'crypto';
 import fs from 'fs/promises'
 
+import asyncHandler from "../middlewares/asyncHAndler.middleware.js";
 import User from "../models/usermodel.js";
 import AppError from "../utils/error.util.js";
 import sendEmail from "../utils/sendEmail.js";
@@ -13,7 +14,10 @@ const cookieOptions={
 
 }
 
-const register=async(req,res,next)=>{
+/**
+ * @REGISTER
+ */
+export const register=asyncHandler(async(req,res,next)=>{
     const {fullName, email, password}= req.body;
 
     if(!fullName|| !email|| !password){
@@ -78,9 +82,12 @@ const register=async(req,res,next)=>{
         message:'User registered sucessfully',
         user,
     });
-};
+});
+/**
+ * @LOGIN
+ */
 
-const login=async (req,res,next)=>{
+export const login=asyncHandler(async (req,res,next)=>{
 
     try {
 
@@ -119,9 +126,11 @@ const login=async (req,res,next)=>{
     }
 
    
-};
-
-const logout=(req,res)=>{
+});
+/**
+ * @LOGOUT
+ */
+export const logout=asyncHandler(async(req,res,next)=>{
     res.cookie('token', null, {
         secure:true,
         maxAge:0,
@@ -131,11 +140,12 @@ const logout=(req,res)=>{
     res.status(200).json({
         suceess: true,
         message:'User logged out  Successfully',
-        user,
     })
-};
-
-const getProfile=async (req,res, next)=>{
+});
+/**
+ * @LOGGED_IN_USER_DETAILS
+ */
+export const getProfile=asyncHandler(async (req,res, next)=>{
     try {
         const userId = req.user.id;
         const user = await User.findById(userId);
@@ -149,9 +159,11 @@ const getProfile=async (req,res, next)=>{
         return next(new AppError('Failed to fetch profile ', 500));
     }
 
-};
-
-const forgotPassword=async(req, res,next)=>{
+});
+/**
+ * @FORGOT_PASSWORD
+ */
+export const forgotPassword=asyncHandler(async(req, res,next)=>{
 
     const {email}= req.body;
 
@@ -190,9 +202,11 @@ const forgotPassword=async(req, res,next)=>{
         return next(new AppError(e.message, 500)
         );
     }
-}
-
-const resetPassword =async(req, res )=>{
+});
+/**
+ * @RESET_PASSWORD
+ */
+export const resetPassword =asyncHandler(async(req, res,next )=>{
         const { resetToken}= req.params;
 
         const {password}= req.body;
@@ -224,8 +238,11 @@ const resetPassword =async(req, res )=>{
             suceess: true,
             message:`Password Changed Sucessfully`,
         })
-}
- const changePassword =async(req, res)=>{
+});
+/**
+ * @CHANGE_PASSWORD
+ */
+export const changePassword =asyncHandler(async(req, res, next)=>{
     const { oldPassword, newPassword}= req.body;
     const {id}= req.user;
     
@@ -233,8 +250,7 @@ const resetPassword =async(req, res )=>{
         return next(new AppError("All fields are manddatory", 400))
     }
 
-    const user = await User.findOne(id).select('+password');
-
+    const user = await User.findById(id).select('+password');
     if(!user){
         return next(new AppError("user does not exist", 400))
     }
@@ -255,11 +271,15 @@ const resetPassword =async(req, res )=>{
         suceess: true,
         message:`Password  changed Sucessfully`,
     })
-}
-const updateUser=async(req, res)=>{
+})
+/**
+ * @UPDATE_USER
+ */
+export const updateUser=asyncHandler(async(req, res,next)=>{
 
     const {fullName }=req.body;
-    const {id} =req.user.id;
+    const {id} =req.user;
+    console.log(id)
 
     const user = await User.findById(id);
 
@@ -302,15 +322,4 @@ const updateUser=async(req, res)=>{
         suceess: true,
         message:`User details updated  Sucessfully`,
     })
-}
-
-export {
-    register,
-    login,
-    logout,
-    getProfile,
-    forgotPassword,
-    resetPassword,
-    changePassword,
-    updateUser,
-}
+})
