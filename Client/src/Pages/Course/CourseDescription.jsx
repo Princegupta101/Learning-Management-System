@@ -12,7 +12,7 @@ function CourseDescripition() {
 
     return(
         <HomeLayout>
-            <div className=" min-h-[90vh] pt-12 md:px-20 flex flex-col items-center justify-center text-white  shadow-[0_0_10px_black] relative">
+            <div className=" min-h-[90vh] pt-12 md:px-20 flex flex-col items-center justify-center text-white  shadow-[0_0_10px_black] ">
                 <div>  
                     <h1 className=" w-full text-2xl font-bold text-yellow-500 mb-5 text-center">
                          {state?.title}
@@ -46,7 +46,7 @@ function CourseDescripition() {
 
                     <div className=" space-y-2 text-xl">
                             <p className=" text-yellow-500 "> Course description:   </p>
-                            <p className=" h-60">{state?.description}</p>
+                            <p className=" md:h-60">{state?.description}</p>
                             {role==="ADMIN"||data?.subscription?.status=== "ACTIVE"?(
                                 <button className=" bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all ease-in-out duration-300">
                                     Watch lectures

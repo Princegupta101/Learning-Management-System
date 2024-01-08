@@ -6,8 +6,8 @@ import HomeLayout from "../Layouts/HomeLayout";
 function HomePage(){
     return(
         <HomeLayout>
-            <div className="pt-10 text-white flex flex-col lg:flex-row items-center justify-center  mx-5 gap-10 lg:mx-16 h-[100vh] sm:h-[90vh]">
-                <div className="lg:w-1/2 space-y-6">
+            <div className="pt-10 text-white flex flex-col md:flex-row items-center justify-center  mx-5 gap-10 lg:mx-16 h-[100vh] sm:h-[90vh]">
+                <div className=" mt-16 md:mt-0  flex flex-col justify-center  md:w-1/2 space-y-6">
                         <h1 className="text-5xl font-semibold">
                             Find out best 
                             <span className=" text-yellow-500 font-bold">

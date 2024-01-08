@@ -287,8 +287,8 @@ export const updateUser=asyncHandler(async(req, res,next)=>{
         return next(new AppError("user does not exist", 400))
     }
 
-    if(req.fullName){
-        user.fullName==fullName;     
+    if(fullName){
+        user.fullName=fullName;     
     }
 
     if(req.file){

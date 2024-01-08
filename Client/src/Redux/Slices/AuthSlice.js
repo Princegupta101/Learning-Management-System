@@ -3,10 +3,11 @@ import toast from "react-hot-toast";
 
 import axiosInstance from "../../Helpers/axiosinstance"
 
+let storedData = localStorage.getItem('data');
 const initialState = {
     isLoggedIn : localStorage.getItem('isLoggedIn')|| false,
     role:localStorage.getItem('role')|| "" ,
-    data: localStorage.getItem('data') || {}
+    data:  storedData !== null ? JSON.parse(storedData) : {}
 }
 
 export const creatAccount =createAsyncThunk("/auth/singup", async(data)=>{
@@ -59,6 +60,33 @@ export const logout=createAsyncThunk("/auth/logout", async ()=>{
         toast.error(error?.response?.data?.message)
     }
 })
+
+export const updateProfile=createAsyncThunk("/user/update/profile", async ( data)=>{
+    try {
+        const res =axiosInstance.put(`user/update`, data);
+        toast.promise(res,{
+            loading:"wait profile update in process..... ",
+            success:(data)=>{
+                return data?.data?.message;
+            },
+            error:"Failed to profile update"
+        })
+        return(await res).data;
+
+    } catch (error) {
+        toast.error(error?.response?.data?.message)
+    }
+})
+
+export const getuserData=createAsyncThunk("/user/details", async ()=>{
+    try {
+        const res =axiosInstance.get("user/me");
+        return(await res).data;
+    } catch (error) {
+        toast.error(error?.message)
+    }
+})
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -79,6 +107,16 @@ const authSlice = createSlice({
             state.data={};
             state.isLoggedIn=false;
             state.role="";
+
+        })
+        .addCase(getuserData.fulfilled, (state, action)=>{
+            if(action?.payload?.user)return;
+            localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+            localStorage.setItem("isLoggedIn", true);
+            localStorage.setItem("role", action?.payload?.user?.role);
+            state.isLoggedIn=true;
+            state.data=action?.payload?.user;
+            state.role=action?.payload?.user?.role
 
         })
 
