@@ -78,7 +78,7 @@ export const register=asyncHandler(async(req,res,next)=>{
     res.cookie('token', token, cookieOptions)
 
     res.status(201).json({
-        suceess:true,
+        success:true,
         message:'User registered sucessfully',
         user,
     });
@@ -115,7 +115,7 @@ export const login=asyncHandler(async (req,res,next)=>{
     
     
         res.status(200).json({
-            suceess: true,
+            success: true,
             message:'User logged in Successfully',
             user,
         })
@@ -138,7 +138,7 @@ export const logout=asyncHandler(async(req,res,next)=>{
     });
 
     res.status(200).json({
-        suceess: true,
+        success: true,
         message:'User logged out  Successfully',
     })
 });
@@ -151,7 +151,7 @@ export const getProfile=asyncHandler(async (req,res, next)=>{
         const user = await User.findById(userId);
 
         res.status(200).json({
-            suceess: true,
+            success: true,
             message:'User details ',
             user,
         })
@@ -191,7 +191,7 @@ export const forgotPassword=asyncHandler(async(req, res,next)=>{
         await sendEmail(email,subject, message);
 
         res.status(200).json({
-            suceess: true,
+            success: true,
             message:`Reset password token has been sent to ${email} Sucessfully`,
         })
     } catch(e ){
@@ -235,7 +235,7 @@ export const resetPassword =asyncHandler(async(req, res,next )=>{
         user.save();
 
         res.status(200).json({
-            suceess: true,
+            success: true,
             message:`Password Changed Sucessfully`,
         })
 });
@@ -268,7 +268,7 @@ export const changePassword =asyncHandler(async(req, res, next)=>{
     user.password=undefined;
 
     res.status(200).json({
-        suceess: true,
+        success: true,
         message:`Password  changed Sucessfully`,
     })
 })
@@ -319,7 +319,7 @@ export const updateUser=asyncHandler(async(req, res,next)=>{
     await user.save();
 
     res.status(200).json({
-        suceess: true,
+        success: true,
         message:`User details updated  Sucessfully`,
     })
 })
