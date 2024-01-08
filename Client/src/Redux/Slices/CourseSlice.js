@@ -9,7 +9,7 @@ const initialState ={
 
 export const getAllCourse = createAsyncThunk("/course/get", async ()=>{
     try {
-        const response=axiosInstance.get("/courses");
+        const response=axiosInstance.get("/course");
         toast.promise(response, {
             loading:"loading course data ...",
             success:"courses loaded sucessfully",
@@ -30,7 +30,7 @@ export const createNewCourse= createAsyncThunk("/course/create", async(data)=>{
         fromData.append("createdBy",data?.createdBy);
         fromData.append("thumbnail",data?.thumbnail);
 
-        const response=axiosInstance.post("/courses", fromData);
+        const response=axiosInstance.post("/course", fromData);
         toast.promise(response,{
             loading:"Creating new course",
             success:"Course created sucessfully",

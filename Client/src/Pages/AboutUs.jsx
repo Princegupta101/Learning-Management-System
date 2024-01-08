@@ -7,9 +7,9 @@ function AboutUs(){
 
     return (
         <HomeLayout>
-            <div className="pl-20 pt-20 flex flex-col text-white">
-                <div className="flex  items-center gap-5 mx-10">
-                    <section className="w-1/2 space-y-10">
+            <div className="lg:pl-20 pt-20 flex flex-col text-white w-full">
+                <div className="flex  flex-col lg:flex-row items-center gap-5 mx-10">
+                    <section className="lg:w-1/2 space-y-10">
                         <h1 className=" text-5xl text-yellow-500  font-semibold">
                             Affordable and quality education 
                         </h1>
@@ -20,7 +20,7 @@ function AboutUs(){
                                 in the growth and wellness of mankind.
                         </p>
                     </section>
-                    <div className="w-1/2">
+                    <div className="lg:w-1/2">
                         <img
                             id="test1"
                             style={{
@@ -33,7 +33,7 @@ function AboutUs(){
                     </div>
                 </div>
 
-                <div className="carousel w-1/2 m-auto my-16">
+                <div className="carousel lg:w-1/2 m-auto my-16">
                     {celebrities && celebrities.map(celebrity => (<CarouselSlide 
                                                                     {...celebrity} 
                                                                     key={celebrity.slideNumber} 

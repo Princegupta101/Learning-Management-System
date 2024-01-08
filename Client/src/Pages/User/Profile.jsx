@@ -11,7 +11,7 @@ function Profile(){
 return (
     <HomeLayout>
             <div className="min-h-[90vh] flex items-center justify-center">
-                <div className="my-10 flex flex-col gap-4 rounded-lg p-4 text-white w-96 shadow-[0_0_10px_black]">
+                <div className="my-10 flex flex-col gap-4 rounded-lg p-4 text-white w-[90vw] md:w-96 shadow-[0_0_10px_black]">
                     <img
                         className="w-40 m-auto rounded-full border border-black"
                         src={userData?.avatar?.secure_url}
@@ -20,23 +20,21 @@ return (
                     <h3 className="text-xl font-semibold  text-center capitalize">
                         {userData?.fullName}
                     </h3>
-                    <div className="grid  grid-cols-2">
+                    <div className="grid  grid-cols-2 ">
                         <p>Email: </p><p>{userData?.email}</p>
-                        <br />
                         <p>Role: </p><p>{userData?.role}</p>
-                        <br />
                         <p>Subscription: </p><p>{userData?.subscription?.status ==="active"?"Action":"Inactive"}</p>
                     </div>
                     <div className="flex items-center justify-between gap-2 ">
                         <Link
                              to='/change-password'
-                            className="w-1/2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm  font-semibold py-2 cursor-pointer" >
+                            className="w-1/2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out  text-center duration-300  rounded-md  font-semibold py-2 cursor-pointer" >
                                     <button>Change password</button>
                         </Link>
 
                         <Link
                              to='/user/editprofile'
-                            className="w-1/2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm  font-semibold py-2 cursor-pointer" >
+                            className="w-1/2 bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300  text-center rounded-md   font-semibold py-2 cursor-pointer" >
                                     <button>Edit Profile</button>
                         </Link>
                     </div>

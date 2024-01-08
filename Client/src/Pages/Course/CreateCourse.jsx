@@ -67,10 +67,10 @@ import { createNewCourse } from "../../Redux/Slices/CourseSlice";
     }
     return(
         <HomeLayout>
-            <div className="flex items-center justify-center h-[100vh]">
+            <div className="flex items-center justify-center  h-[100vh]">
                 <form 
                     onSubmit={OnFormSubmit}
-                    className="flex flex-col justify-center gap-5 rounded-lg p-4  text-white w-[700px] my-10  shadow-[0_0_10px_black] relative "
+                    className="flex flex-col justify-center gap-5 rounded-lg p-4 mt-5 text-white w-[90vw] lg:w-[700px] my-10  shadow-[0_0_10px_black]  "
                 >
                     <Link className=" absolute  top-8 text-accent cursor-pointer">
                         <AiOutlineArrowLeft/>
@@ -80,7 +80,7 @@ import { createNewCourse } from "../../Redux/Slices/CourseSlice";
                         Create New Course
                     </h1>
 
-                    <main className=" grid grid-cols-2 gap-x-10">
+                    <main className=" grid lg:grid-cols-2 grid-cols-1 gap-x-10">
                         <div>
                             <div>
                                 <label htmlFor="image_uploads" className="  cursor-pointer">

@@ -6,7 +6,7 @@ function CourseCard({data}){
     return(
         <div 
             onClick={()=>navigate("/course/description/", {state:{...data}})}
-           className=" text-white w-[22rem] h-[430px] shadow-lg rounded cursor-pointer  group overflow-hidden">
+           className=" text-white w-[20rem] h-[400px] shadow-lg rounded cursor-pointer  group overflow-hidden">
             <div className=" overflow-hidden">
                 <img
                     className="h-48 w-full  rounded-tl-lg rounded-tr-lg group-hover:scale=[1,2] transition-all ease-in-out duration-300"

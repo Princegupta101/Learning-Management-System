@@ -36,13 +36,13 @@ function Login(){
         //dispatch create account action
        const response = await dispatch(login(loginData));
        console.log(response)
-        if(response?.payload?.success)
-          navigate('/');
-
-          setloginData({
-            email:"",
-            password:"",
-        })
+        if(response?.payload?.success){
+            navigate('/');
+            setloginData({
+                email:"",
+                password:"",
+            })
+        }
     }
     return(
         <HomeLayout>
