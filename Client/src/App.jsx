@@ -13,6 +13,9 @@ import Denied from './Pages/Denied.jsx'
 import HomePage from './Pages/HomePage.jsx'
 import Login from './Pages/Login.jsx'
 import NotFound from './Pages/NotFound.jsx'
+import ChangePassword from './Pages/Password/changePassword.jsx'
+import ForgetPassword from './Pages/Password/forgetPassword.jsx'
+import ResetPassword from './Pages/Password/resetPassword.jsx'
 import Signup from './Pages/Signup.jsx'
 import EditProfile from './Pages/User/EditProfile.jsx'
 import Profile from './Pages/User/Profile.jsx'
@@ -26,13 +29,13 @@ function App() {
           <Route path='/courses' element={<CourseList/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
           <Route path='/denied' element={<Denied/>}></Route>
-
           <Route path='/course/description' element={<CourseDescripition/>}></Route>
 
           <Route path='/signup' element={<Signup/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
-
-
+          <Route path='/forget-password' element={<ForgetPassword/>}></Route>
+          <Route path="/reset-password/:resetToken" element={<ResetPassword/>} />
+          
           <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>}>
            <Route path='/course/create' element={<CreateCourse/>}></Route>
           </Route>
@@ -40,6 +43,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={["ADMIN", 'USER']}/>}>
             <Route path='/user/profile' element={<Profile/>}></Route> 
             <Route path='/user/editprofile' element={<EditProfile/>}></Route> 
+            <Route path='/change-password' element={<ChangePassword/>}></Route>
           </Route>
                   
           <Route path='*' element={<NotFound/>}></Route>

@@ -85,7 +85,6 @@ function Signup(){
 
         //dispatch create account action
        const response = await dispatch(creatAccount(formData));
-       console.log(response)
         if(response?.payload?.success){
             navigate("/");
             setSignupData({
@@ -100,7 +99,7 @@ function Signup(){
     return(
         <HomeLayout>
                 <div className=" flex items-center justify-center h-[90vh]">
-                    <form  noValidate onSubmit={createNewAccount} className="flex flex-col   justify-center gap-3  rounded-lg text-white p-4 w-80 sm:w-96 shadow-[0_0_10px_black] ">
+                    <form  noValidate onSubmit={createNewAccount} className="flex flex-col   justify-center gap-3  rounded-lg text-white p-4 w-80  shadow-[0_0_10px_black] ">
                         <h1 className="text-center text-2xl font-bold">Registion Page</h1>
                         <label htmlFor="image_uploads" className=" cursor-pointer">
                             {prevImage ? (

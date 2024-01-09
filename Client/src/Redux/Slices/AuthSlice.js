@@ -4,10 +4,21 @@ import toast from "react-hot-toast";
 import axiosInstance from "../../Helpers/axiosinstance"
 
 let storedData = localStorage.getItem('data');
+let parsedData = {};
+
+if (storedData !== null) {
+  try {
+    parsedData = JSON.parse(storedData);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 const initialState = {
     isLoggedIn : localStorage.getItem('isLoggedIn')|| false,
     role:localStorage.getItem('role')|| "" ,
-    data:  storedData !== null ? JSON.parse(storedData) : {}
+    data:  parsedData
+    
 }
 
 export const creatAccount =createAsyncThunk("/auth/singup", async(data)=>{
@@ -87,6 +98,57 @@ export const getuserData=createAsyncThunk("/user/details", async ()=>{
     }
 })
 
+export const forgetPassword =createAsyncThunk("/auth/forget-Password", async(data)=>{
+    try {
+        const res =axiosInstance.post("user/reset", data);
+        toast.promise(res,{
+            loading:"wait forgetPassword in process..... ",
+            success:(data)=>{
+                return data?.data?.message;
+            },
+            error:"Failed to forgetPassword"
+        })
+        return(await res).data;
+        
+    } catch (error) {
+        toast.error(error?.response?.data?.message);
+    }
+})
+
+export const changePassword = createAsyncThunk(
+    "/auth/changePassword",
+    async (userPassword) => {
+        try {
+        let res = axiosInstance.post("/user/change-password", userPassword);
+        toast.promise(res,{
+            loading:"wait  in process..... ",
+            success:(data)=>{
+                return data?.data?.message;
+            },
+            error:"Failed to change Password"
+        })
+        return(await res).data;
+        } catch (error) {
+        toast.error(error?.response?.data?.message);
+        }
+ });
+
+export const resetPassword = createAsyncThunk("/user/reset", async (data) => {
+    try {
+        let res = axiosInstance.post(`/user/reset/${data.resetToken}`, { password: data.password });
+        toast.promise(res,{
+            loading:"wait  in process..... ",
+            success:(data)=>{
+                return data?.data?.message;
+            },
+            error:"Failed to reset Password"
+        })
+        return(await res).data;
+    } catch (error) {
+        toast.error(error?.response?.data?.message);
+    }
+});
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -123,5 +185,5 @@ const authSlice = createSlice({
     }
 });
 
-export const {}= authSlice.actions;
+// export const {}= authSlice.actions;
 export default authSlice.reducer;
