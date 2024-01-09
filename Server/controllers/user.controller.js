@@ -182,7 +182,7 @@ export const forgotPassword=asyncHandler(async(req, res,next)=>{
 
     await user.save();
 
-    const resetPasswordUrl =`${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+    const resetPasswordUrl =`${process.env.FRONTEND_URL}reset-password/${resetToken}`;
      
     const subject = 'Reset Password';
     const message = `You can reset your password by clicking <a href=${resetPasswordUrl} target="_blank">Reset your password</a>\nIf the above link does not work for some reason then copy paste this link in new tab ${resetPasswordUrl}.\n If you have not requested this, kindly ignore.`;
