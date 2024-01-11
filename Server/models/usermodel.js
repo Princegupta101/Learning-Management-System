@@ -30,6 +30,10 @@ const userSchema= new Schema({
         minLength:[8,'Password must be 8 charchter'],
         select:false
     },
+    subscription: {
+        id: String,
+        status: String,
+     },
     avatar:{
         public_id:{
             type:'String',
