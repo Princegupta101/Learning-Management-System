@@ -10,6 +10,8 @@ import CourseDescripition from './Pages/Course/CourseDescription.jsx'
 import CourseList from './Pages/Course/CourseList.jsx'
 import CreateCourse from './Pages/Course/CreateCourse.jsx'
 import Denied from './Pages/Denied.jsx'
+import AddCourseLectures from './Pages/Deshboard/AddLectures.jsx'
+import Displaylectures from './Pages/Deshboard/DisplayLectures.jsx'
 import HomePage from './Pages/HomePage.jsx'
 import Login from './Pages/Login.jsx'
 import NotFound from './Pages/NotFound.jsx'
@@ -49,7 +51,9 @@ function App() {
             <Route path='/change-password' element={<ChangePassword/>}></Route>
             <Route path='/checkout' element={<CheckoutPage/>}></Route>
             <Route path='/checkout/success' element={<CheckoutSuccess/>}></Route>
-            <Route path='/checkout/fail' element={<CheckoutFailure/>}></Route>
+            <Route path='/checkout/fail' element={<CheckoutFailure/>}></Route>      
+            <Route path='/course/displaylecture' element={<Displaylectures/>}></Route>
+            <Route path='/course/addlecture' element={<AddCourseLectures/>}></Route>
           </Route>
                   
           <Route path='*' element={<NotFound/>}></Route>

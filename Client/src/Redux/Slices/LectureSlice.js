@@ -9,7 +9,7 @@ const initialState={
  
 export const getCourseLectures= createAsyncThunk("/course/lecture/get", async(cid)=>{
     try {
-        const response = axiosInstance.get(`/courses/${cid}`);
+        const response = axiosInstance.get(`/course/${cid}`);
         toast.promise(response,{
             loading:"Fetching course lectures",
             success:"Lectures fetched successfully",
@@ -28,7 +28,7 @@ export const addCourseLectures= createAsyncThunk("/course/lecture/add", async(da
         fromData.append("title",data.title);
         fromData.append("description",data.description);
         
-        const response = axiosInstance.post(`/courses/${data.id}`,fromData);
+        const response = axiosInstance.post(`/course/${data.id}`,fromData);
         toast.promise(response,{
             loading:"Adding course lecture",
             success:"Lectures added successfully",
@@ -40,10 +40,10 @@ export const addCourseLectures= createAsyncThunk("/course/lecture/add", async(da
     }
 });
 
-export const deleteCourseLectures= createAsyncThunk("/course/lecture/delete", async(data)=>{
+export const deleteCourseLecture= createAsyncThunk("/course/lecture/delete", async(data)=>{
     try {
 
-        const response = axiosInstance.delete(`/courses/${data.courseId}/lectures/${data.lectureId}`);
+        const response = axiosInstance.delete(`/course/${data.courseId}/lectures/${data.lectureId}`);
         toast.promise(response,{
             loading:"Delete course lecture",
             success:"Lecture delete successfully",
@@ -56,7 +56,7 @@ export const deleteCourseLectures= createAsyncThunk("/course/lecture/delete", as
 });
 
 const lectureSlice = createSlice({
-    name:"",
+    name:"lecture",
     initialState,
     reducers:{},
     extraReducers:(builder)=>{
