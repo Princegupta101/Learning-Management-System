@@ -15,11 +15,13 @@ function Profile(){
 
 
      async function handleCancelation() {
+        if(window.confirm("Are you Sure Want  Cancel Subscription ?")){
             toast("Initiating cancellation..")
             await dispatch(cancelCourseBundle());
             await dispatch(getuserData());
             toast.success("Cancellation completed!");
             navigate("/")
+        }  
      }
     return (
         <HomeLayout>

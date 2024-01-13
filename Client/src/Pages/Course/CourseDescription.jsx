@@ -20,7 +20,7 @@ function CourseDescripition() {
                             {state?.title}
                         </h1>
                     </div>
-                    <div className=" grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-10 py-10 relative w-1/2 md:w-[80%] ">
+                    <div className=" grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10 py-10 relative w-1/2 md:w-[80%] ">
 
                         <div className=" space-y-3">
                             <img

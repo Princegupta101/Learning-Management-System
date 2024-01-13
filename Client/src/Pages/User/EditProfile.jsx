@@ -46,7 +46,7 @@ function EditProfile(){
 
     async function onFormSubmit(e){
        e.preventDefault();
-       console.log(data)
+    //    console.log(data)
         if(!data.fullName||!data.avatar){
             toast.error("All fields are mandatory");
             return;

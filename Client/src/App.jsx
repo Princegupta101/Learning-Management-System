@@ -11,6 +11,7 @@ import CourseList from './Pages/Course/CourseList.jsx'
 import CreateCourse from './Pages/Course/CreateCourse.jsx'
 import Denied from './Pages/Denied.jsx'
 import AddCourseLectures from './Pages/Deshboard/AddLectures.jsx'
+import AdminDeshboard from './Pages/Deshboard/AdminDeshboard.jsx'
 import Displaylectures from './Pages/Deshboard/DisplayLectures.jsx'
 import HomePage from './Pages/HomePage.jsx'
 import Login from './Pages/Login.jsx'
@@ -43,6 +44,8 @@ function App() {
           
           <Route element={<RequireAuth allowedRoles={["ADMIN"]}/>}>
            <Route path='/course/create' element={<CreateCourse/>}></Route>
+           <Route path='/course/addlecture' element={<AddCourseLectures/>}></Route>
+           <Route path='/admin/deshboard' element={<AdminDeshboard/>}></Route>
           </Route>
 
           <Route element={<RequireAuth allowedRoles={["ADMIN", 'USER']}/>}>
@@ -53,7 +56,7 @@ function App() {
             <Route path='/checkout/success' element={<CheckoutSuccess/>}></Route>
             <Route path='/checkout/fail' element={<CheckoutFailure/>}></Route>      
             <Route path='/course/displaylecture' element={<Displaylectures/>}></Route>
-            <Route path='/course/addlecture' element={<AddCourseLectures/>}></Route>
+           
           </Route>
                   
           <Route path='*' element={<NotFound/>}></Route>

@@ -17,8 +17,10 @@ function Displaylectures(){
     const [currentVideo, setCurrentVideo]=useState(0);
 
     async  function onLectureDelete(courseId, lectureId){
-        await dispatch(deleteCourseLecture({courseId:courseId,lectureId:lectureId}));
-        await  dispatch(getCourseLectures(courseId));
+        if(window.confirm("Are you Sure Want to delete the Lecture ?")){
+            await dispatch(deleteCourseLecture({courseId:courseId,lectureId:lectureId}));
+            await  dispatch(getCourseLectures(courseId));
+        }
     }
     useEffect(()=>{
         if(!state) navigate("/course")
@@ -75,7 +77,7 @@ function Displaylectures(){
                                     </button>
                                 )}
                         </div> 
-                        <ul className=" space-y-4 md:overflow-y-scroll">
+                        <ul className=" space-y-4 md:overflow-y-auto">
                      
                             {lectures && 
                                 lectures.map((lecture, idx) => {

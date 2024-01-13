@@ -89,11 +89,11 @@ function HomeLayout({ children }) {
 
                         {!isLoggedIn &&(
                             <li className=' absolute bottom-4 w-[90%]'>
-                                <div className='w-full flex items-center justify-center'>
-                                        <button className='btn-primary  bg-blue-500 px-4 py-1 font-semibold rounded-md w-full '>
+                                <div className='w-full flex flex-col items-center justify-center'>
+                                        <button className='btn-primary  bg-blue-500 px-3 py-2 font-semibold rounded-md w-full '>
                                             <Link to="/login">Login</Link>
                                         </button>
-                                        <button className=' btn-secondary  bg-pink-600 px-4 py-1 font-semibold rounded-md w-full '>
+                                        <button className=' btn-secondary  bg-pink-600 px-3 py-2 font-semibold rounded-md w-full '>
                                             <Link to="/signup">Signup</Link>
                                         </button>
                                 </div>
@@ -102,11 +102,11 @@ function HomeLayout({ children }) {
 
                         {isLoggedIn &&(
                             <li className=' absolute bottom-4  w-[90%]'>
-                                <div className='w-full flex items-center justify-center'>
-                                        <button className='btn-primary  bg-blue-500 px-4 py-1 font-semibold rounded-md w-full '>
+                                <div className='w-full flex  flex-col items-center justify-center'>
+                                        <button className='btn-primary  bg-blue-500 px-3 py-2 font-semibold rounded-md w-full '>
                                             <Link to="/user/profile">Profile</Link>
                                         </button>
-                                        <button className=' btn-secondary  bg-pink-600 px-4 py-1 font-semibold rounded-md w-full '>
+                                        <button className=' btn-secondary  bg-pink-600 px-3 py-2 font-semibold rounded-md w-full '>
                                             <Link  onClick={handleLogout}>Logout</Link>
                                         </button>
                                 </div>

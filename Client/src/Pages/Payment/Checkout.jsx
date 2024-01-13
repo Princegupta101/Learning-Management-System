@@ -42,7 +42,7 @@ function Checkout() {
                 toast.success("Payment successfull");
 
                 const res = await dispatch(verifyUserPayment(paymentDetails));
-                console.log(res);
+                // console.log(res);
                 res?.payload?.success ? navigate("/checkout/success") : navigate("/checkout/fail");
             }
         }
