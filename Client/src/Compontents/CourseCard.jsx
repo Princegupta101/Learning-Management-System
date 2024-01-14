@@ -13,7 +13,7 @@ function CourseCard({data}){
                     src={data?.thumbnail?.secure_url}
                     alt="course thumbnail"
                 />
-                <div className=" p-1 space-y-1  text-white">
+                <div className=" p-5 space-y-1  text-white">
                     <h2  className=" text-xl font-bold text-yellow-500 line-clamp-2">
                         {data?.title}
                     </h2>

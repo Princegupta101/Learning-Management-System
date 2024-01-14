@@ -2,23 +2,25 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import HomeLayout from "../../Layouts/HomeLayout";
-import { createNewCourse } from "../../Redux/Slices/CourseSlice";
+import { updateCourse } from "../../Redux/Slices/CourseSlice";
 
-  function CreateCourse(){
+  function EditCourse(){
 
     const dispatch =useDispatch();
     const navigate =useNavigate();
-
+    const {state }=useLocation();
+    // console.log(state)
     const [userInput, setUserInput]=useState({
-        title:"",
-        category:"",
-        description:"",
+        id:state?._id,
+        title:state?.title,
+        category:state?.category,
+        description:state?.description,
+        createdBy:state?.createdBy,
         thumbnail:null,
-        previewImage:""
-
+        previewImage:state.thumbnail?.secure_url,
     });
 
      function handleImageUpload(e){
@@ -48,39 +50,37 @@ import { createNewCourse } from "../../Redux/Slices/CourseSlice";
 
     async function OnFormSubmit(e){
         e.preventDefault();
-        if(!userInput.title ||!userInput.description||!userInput.category||!userInput.thumbnail|!userInput.previewImage){
+        if(!userInput.title ||!userInput.description||!userInput.category ){
             toast.error("All fields are mandatory");
             return;
         }
 
-        const response = await dispatch(createNewCourse(userInput));
+        const response = await dispatch(updateCourse(userInput));
         if(response?.payload?.success){
             setUserInput({
                 title:"",
                 category:"",
                 description:"",
                 thumbnail:null,
-                previewImage:""
             });
             navigate("/courses");
         }
     }
     return(
         <HomeLayout>
-             <div className="flex items-center justify-center h-[100vh]">
+            <div className="flex items-center justify-center h-[100vh]">
                 <form 
                     onSubmit={OnFormSubmit}
-                    className="flex flex-col justify-center gap-2 md:gap-5 rounded-lg p-4 mt-5 relative text-white w-[80vw] md:w-[700px] sm:my-10   shadow-[0_0_10px_black]  "
+                    className="flex flex-col justify-center gap-5 rounded-lg p-4 mt-5 text-white w-[80vw] md:w-[700px] sm:my-10   relative shadow-[0_0_10px_black]  "
                 >
-            
-                      <div>
-                        <Link to={"/course"} className="  absolute left-2 text-xl text-accent cursor-pointer">
+                    <div>
+                        <Link to={"/"} className=" absolute left-2  text-lg text-accent cursor-pointer">
                             <AiOutlineArrowLeft/>
                         </Link>
                     </div>
             
                     <h1 className=" text-center text-2xl font-bold">
-                        Create New Course
+                        Edit Course
                     </h1>
 
                     <main className=" grid lg:grid-cols-2 grid-cols-1 gap-x-10">
@@ -175,7 +175,7 @@ import { createNewCourse } from "../../Redux/Slices/CourseSlice";
                     </main>
 
                     <button type="submit" className="w-full bg-yellow-600 text-lg hover:bg-yellow-500 transition-all duration-300 ease-in-out py-2 rounded-sm font-semibold">
-                        Create Course
+                        Update Course
                     </button>
 
                 </form>
@@ -183,4 +183,4 @@ import { createNewCourse } from "../../Redux/Slices/CourseSlice";
         </HomeLayout>  
     )
 }
-export default CreateCourse;
+export default EditCourse;

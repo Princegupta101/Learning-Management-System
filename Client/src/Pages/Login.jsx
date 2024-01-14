@@ -77,14 +77,6 @@ function Login(){
                              />
                         </div>
 
-                        <div
-                            onClick={() =>
-                                setloginData({ email: "guestlogin@gmail.com", password: "123456789@Lms" })
-                            }
-                            className="text-center link text-accent cursor-pointer"
-                        >
-                            Guest Login
-                        </div>
                         <button  type="submit" className=" mt-2 bg-yellow-600 hover:bg-yellow-500 py-2 font-semibold text-lg cursor-pointer transition-all ease-in-out duration-300  rounded-sm">
                                 Login
                         </button>

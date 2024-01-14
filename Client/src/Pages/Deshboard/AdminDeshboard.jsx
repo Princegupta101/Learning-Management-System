@@ -5,6 +5,7 @@ import { BsCollectionPlayFill, BsTrash } from 'react-icons/bs';
 import {FaUsers} from "react-icons/fa";
 import { FcSalesPerformance } from "react-icons/fc";
 import { GiMoneyStack } from "react-icons/gi";
+import { TiEdit } from "react-icons/ti";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -75,11 +76,11 @@ function AdminDeshboard(){
     return (
         <HomeLayout>
             <div className="min-h-[90vh] pt-5 flex flex-col flex-wrap gap-10 text-white">
-                <h1 className="text-center text-5xl font-semibold text-yellow-500">
+                <h1 className="text-center  text-3xl sm:text-5xl font-semibold text-yellow-500">
                     Admin Dashboard
                 </h1>
 
-                <div className="grid md:grid-cols-2 gap-5 m-auto mx-10">
+                <div className="grid md:grid-cols-2 gap-5 m-auto md:mx-10">
                     <div className="flex flex-col items-center gap-10 p-5 shadow-lg rounded-md">
                         <div className="w-80 h-80">
                             <Pie data={userData}/>
@@ -129,14 +130,14 @@ function AdminDeshboard(){
 
                 <div className=" lg:mx-[10%] w-[80%] self-center flex flex-col items-center justify-center gap-10 mb-10">
                     <div className="flex w-full items-center justify-between">
-                        <h1 className="text-center text-3xl font-semibold">
+                        <h1 className="text-center  text-2xl sm:text-3xl font-semibold">
                                Courses overview
                         </h1>
                         <button
                         onClick={() => {
                             navigate("/course/create");
                         }}
-                        className="w-fit bg-yellow-500 hover:bg-yellow-600 transition-all ease-in-out duration-300 rounded py-2 px-4 font-semibold text-lg cursor-pointer"
+                        className="w-fit bg-yellow-500 hover:bg-yellow-600 transition-all ease-in-out duration-300 rounded py-2 px-2 sm:px-4 font-semibold sm:text-lg cursor-pointer"
                         >
                         Create new course
                         </button>
@@ -179,8 +180,9 @@ function AdminDeshboard(){
                                     ></textarea>
                                 </td>
                                 <td className="flex items-center gap-4">
+                                    
                                     <button
-                                        className="bg-green-500 hover:bg-green-600 transition-all ease-in-out duration-300 text-xl py-2 px-4 rounded-md font-bold"
+                                        className="bg-green-500 hover:bg-green-600 transition-all ease-in-out duration-300 text-xl py-2 px-3 rounded-md font-bold"
                                         onClick={() =>
                                             navigate("/course/displaylecture", {
                                             state: { ...course },
@@ -189,8 +191,21 @@ function AdminDeshboard(){
                                     >
                                     <BsCollectionPlayFill />
                                     </button>
+
                                     <button
-                                        className="bg-red-500 hover:bg-red-600 transition-all ease-in-out duration-300 text-xl py-2 px-4 rounded-md font-bold"
+                                        className=" bg-yellow-500 hover:bg-yellow-600 transition-all ease-in-out duration-300 text-xl py-2 px-3 rounded-md font-bold"
+                                        onClick={() => 
+                                             navigate("/course/edit", {
+                                            state: {
+                                                   ...course
+                                                 }
+                                            })}
+                                    >
+                                    <TiEdit />
+                                    </button>
+                                    
+                                    <button
+                                        className="bg-red-500 hover:bg-red-600 transition-all ease-in-out duration-300 text-xl py-2 px-3 rounded-md font-bold"
                                         onClick={() => onCourseDelete(course?._id)}
                                     >
                                     <BsTrash />
