@@ -74,7 +74,7 @@ import { createNewCourse } from "../../Redux/Slices/CourseSlice";
                 >
             
                       <div>
-                        <Link to={"/course"} className="  absolute left-2 text-xl text-accent cursor-pointer">
+                        <Link to={"/courses"} className="  absolute left-2 text-xl text-accent cursor-pointer">
                             <AiOutlineArrowLeft/>
                         </Link>
                     </div>

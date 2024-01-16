@@ -65,8 +65,8 @@ function AddCourseLectures (){
 
     return (
         <HomeLayout>
-            <div className="min-h-[90vh] text-white flex flex-col items-center justify-center gap-10 mx-16">
-                <div className="flex flex-col gap-5 p-2 shadow-[0_0_10px_black] w-96 rounded-lg">
+            <div className="min-h-[90vh] text-white flex flex-col items-center justify-center gap-10 mx-5 sm:mx-16 md:mx-20">
+                <div className="flex flex-col gap-5 p-2 shadow-[0_0_10px_black] w-[80vw] md:w-96  rounded-lg">
                     <header className="flex items-center justify-center relative">
                         <button 
                             className="absolute left-2 text-2xl text-green-500"

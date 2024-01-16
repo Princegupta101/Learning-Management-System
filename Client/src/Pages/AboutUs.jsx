@@ -7,7 +7,7 @@ function AboutUs(){
 
     return (
         <HomeLayout>
-            <div className="lg:pl-20 pt-20 flex flex-col text-white w-full">
+            <div className="lg:pl-20 pt-20 flex flex-col text-white  min-h-[90vh]">
                 <div className="flex  flex-col lg:flex-row items-center gap-5 mx-10">
                     <section className="lg:w-1/2 space-y-10">
                         <h1 className=" text-5xl text-yellow-500  font-semibold">
@@ -33,7 +33,7 @@ function AboutUs(){
                     </div>
                 </div>
 
-                <div className="carousel lg:w-1/2 m-auto my-16">
+                <div className=" w-[80vw] carousel lg:w-1/2 m-auto my-16">
                     {celebrities && celebrities.map(celebrity => (<CarouselSlide 
                                                                     {...celebrity} 
                                                                     key={celebrity.slideNumber} 

@@ -3,21 +3,10 @@ import toast from "react-hot-toast";
 
 import axiosInstance from "../../Helpers/axiosinstance"
 
-let storedData = localStorage.getItem('data');
-let parsedData = {};
-
-if (storedData !== null) {
-  try {
-    parsedData = JSON.parse(storedData);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 const initialState = {
     isLoggedIn : localStorage.getItem('isLoggedIn')|| false,
     role:localStorage.getItem('role')|| "" ,
-    data:  parsedData
+    data: localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : {},
     
 }
 
@@ -155,6 +144,15 @@ const authSlice = createSlice({
     reducers:{},
     extraReducers:(builder)=>{
         builder
+        .addCase(creatAccount.fulfilled, (state, action)=>{
+            localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+            localStorage.setItem("isLoggedIn", true);
+            localStorage.setItem("role", action?.payload?.user?.role);
+            state.data=action?.payload?.user;
+            state.role=action?.payload?.user?.role
+            state.isLoggedIn = true;
+
+        })
         .addCase(login.fulfilled, (state, action)=>{
             localStorage.setItem("data", JSON.stringify(action?.payload?.user));
             localStorage.setItem("isLoggedIn", true);
