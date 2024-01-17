@@ -7,12 +7,12 @@ import User from "../models/usermodel.js";
 import AppError from "../utils/error.util.js";
 import sendEmail from "../utils/sendEmail.js";
 
-const cookieOptions={
-    maxAge : 7*24*60*60*1000,
-    httpOnly:true,
-    secure:true
+const cookieOptions = {
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    secure: true
+};
 
-}
 
 /**
  * @REGISTER
@@ -75,7 +75,7 @@ export const register=asyncHandler(async(req,res,next)=>{
 
     user.password= undefined;
 
-    res.cookie('token', token, cookieOptions)
+    res.cookie('token', token, { ...cookieOptions, sameSite: 'None' });
 
     res.status(201).json({
         success:true,
@@ -111,8 +111,7 @@ export const login=asyncHandler(async (req,res,next)=>{
         user.password= undefined;
     
     
-        res.cookie('token ',token, cookieOptions);
-    
+        res.cookie('token', token, { ...cookieOptions, sameSite: 'None' });
     
         res.status(200).json({
             success: true,
