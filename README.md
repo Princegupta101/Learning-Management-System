@@ -2,6 +2,10 @@
 
 This repository contains the source code and implementation of a Learning Management System (LMS) developed using the MERN stack (MongoDB, Express.js, React, Node.js) along with Tailwind CSS and DaisyUI for styling, Cloudinary for managing media, and Razorpay for subscription management.
 
+## VIDEO 
+
+https://youtu.be/T8YZitqdlEY
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -9,6 +13,8 @@ This repository contains the source code and implementation of a Learning Manage
 - [Installation](#installation)
 - [Subscription Management](#subscription-management)
 - [Prerequisites](#prerequisites)
+- [Contributing](#contributing)
+- [Further-Support](#further-support)
 
 ## Overview
 
@@ -113,3 +119,11 @@ Before running this project locally, ensure you have the following installed:
 - [MongoDB](https://www.mongodb.com/) (v4.x or higher)
 - [Cloudinary](https://cloudinary.com/) account and API credentials
 - [Razorpay](https://razorpay.com/) account and API credentials
+
+## Contributing
+
+We welcome contributions to Pixel Slim! Feel free to create pull requests with your enhancements or bug fixes. Please ensure your contributions adhere to the coding style and conventions used in the project.
+
+## Further-Support
+
+If you encounter any issues or have questions, feel free to raise them as GitHub issues, and we'll be happy to assist you.
