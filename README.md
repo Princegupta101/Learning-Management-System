@@ -1,4 +1,4 @@
-# LMS(Learning Management System Example)
+# LMS(Learning Management System )
 
 This repository contains the source code and implementation of a Learning Management System (LMS) developed using the MERN stack (MongoDB, Express.js, React, Node.js) along with Tailwind CSS and DaisyUI for styling, Cloudinary for managing media, and Razorpay for subscription management.
 
@@ -122,7 +122,7 @@ Before running this project locally, ensure you have the following installed:
 
 ## Contributing
 
-We welcome contributions to Pixel Slim! Feel free to create pull requests with your enhancements or bug fixes. Please ensure your contributions adhere to the coding style and conventions used in the project.
+We welcome contributions to Learning Management System  Feel free to create pull requests with your enhancements or bug fixes. Please ensure your contributions adhere to the coding style and conventions used in the project.
 
 ## Further-Support
 
