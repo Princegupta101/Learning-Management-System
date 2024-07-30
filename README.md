@@ -110,7 +110,7 @@ npm run dev
   - Cancel an existing subscription
 
 ## Low Level Diagram
-![diagram](Learning-Management-System/low-level-diagram.png)
+![diagram](low-level-diagram.png)
 
 ## Prerequisites
 
