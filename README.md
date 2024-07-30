@@ -109,8 +109,9 @@ npm run dev
   - Select and purchase a subscription plan via Razorpay
   - Cancel an existing subscription
 
-## Low Level Design
-![desgin](Lms\low-level-diagram.png)
+## Low Level Diagram
+![diagram](Learning-Management-System/low-level-diagram.png)
+
 ## Prerequisites
 
 Before running this project locally, ensure you have the following installed:
