@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 // CORS configuration
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, // For security, use an environment variable to store the frontend URL
+    origin: `https://learning-management-system-roan.vercel.app`, // For security, use an environment variable to store the frontend URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204,
