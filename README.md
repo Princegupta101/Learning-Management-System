@@ -22,13 +22,12 @@ The Learning Management System (LMS) is a web-based application that facilitates
 
 ## Features
 
-- User authentication and authorization
+- User authentication and authorization (using JWT)
 - Course creation, modification, and deletion
-- Content upload and management using Cloudinary
-- User enrollment in courses
-- Course progress tracking
+- Content upload and management via Cloudinary
+- User enrollment in courses and progress tracking
 - Interactive user interface using React and Tailwind CSS
-- Subscription management with Razorpay
+- Subscription management with Razorpay (for premium content)
 
 ## Installation
 
