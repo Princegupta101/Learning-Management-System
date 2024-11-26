@@ -8,6 +8,7 @@ import { razorpay } from "../server.js";
 
 /**
  * @GET_RAZORPAY_ID
+ * Returns the Razorpay API key for the client-side.
  */
 export const getRaZorpayApikey =asyncHandler(async(req, res, next)=>{
     try {
@@ -25,6 +26,7 @@ export const getRaZorpayApikey =asyncHandler(async(req, res, next)=>{
 });
 /**
  * @ACTIVATE_SUBSCRIPTION
+ * Handles the subscription process for the user by creating a new Razorpay subscription.
  */
 export const buySubscription =asyncHandler(async(req, res, next)=>{
     try {
@@ -76,6 +78,7 @@ export const buySubscription =asyncHandler(async(req, res, next)=>{
 });
 /**
  * @VERIFY_SUBSCRIPTION
+ * Verifies the payment for the subscription by validating the Razorpay payment signature.
  */
 export const verifySubscription =asyncHandler(async(req, res, next)=>{
     try {
@@ -120,6 +123,7 @@ export const verifySubscription =asyncHandler(async(req, res, next)=>{
 });
 /**
  * @CANCEL_SUBSCRIPTION
+ * Cancels the user's subscription with Razorpay and updates the user's subscription status to inactive.
  */
 export const cancelSubscription =asyncHandler(async(req, res, next)=>{
 
@@ -159,6 +163,7 @@ export const cancelSubscription =asyncHandler(async(req, res, next)=>{
 });
 /**
  * @GET_RAZORPAY_ID
+ * Fetches and returns the payment records for all subscriptions, with monthly payment statistics.
  */
 export const allPayments =asyncHandler(async(req, res, next)=>{
     try {

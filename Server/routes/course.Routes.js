@@ -5,7 +5,11 @@ import { authorizedRoles, authorizedSubscriber, isLoggedIn } from '../middleware
 import upload from '../middlewares/multer.middleware.js';
 
 const router = Router();
-
+/**
+ * @route GET /courses
+ * @description Get all courses
+ * @access Public
+ */
 router.route('/')
     .get( 
         getAllCourse
@@ -16,7 +20,11 @@ router.route('/')
             upload.single('thumbnail'), 
            createCourse
         );
-
+/**
+ * @route GET, PUT, DELETE /courses/:id
+ * @description Get, update, or remove a course by ID
+ * @access Admin only
+ */
 router.route('/:id')
     .get(
         isLoggedIn ,
@@ -40,6 +48,11 @@ router.route('/:id')
         upload.single('lecture'), 
         addLectureToCourseById
     );
+    /**
+ * @route DELETE /courses/:courseId/lectures/:lectureId
+ * @description Remove a specific lecture from a course
+ * @access Admin only
+ */
     router.route('/:courseId/lectures/:lectureId') .delete(
         isLoggedIn,
         authorizedRoles('ADMIN'),

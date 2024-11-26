@@ -1,5 +1,10 @@
 import {model , Schema} from "mongoose";
 
+/**
+ * @courseSchema - Mongoose schema for Course.
+ * This schema defines the structure and validation rules for course data, including title, description, category, thumbnail, lectures, and metadata.
+ */
+
 const courseSchema = new Schema({
     title:{
         type:String,

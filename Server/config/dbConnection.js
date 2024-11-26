@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
+/**
+ * @Connects to MongoDB database
+ */
 mongoose.set('strictQuery', false);
 
 const connectionToDB= async ()=>{

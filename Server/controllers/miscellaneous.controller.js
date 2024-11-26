@@ -3,6 +3,11 @@ import User from '../models/usermodel.js';
 import AppError from '../utils/error.util.js';
 import sendEmail from '../utils/sendEmail.js';
 
+/**
+ * @CONTACT_US
+ * Handles the submission of the "Contact Us" form by the user.
+ * Sends an email to the admin with the user's details.
+ */
 export const contactUs = asyncHandler(async (req, res, next) => {
     const { name, email, message } = req.body;
   
@@ -25,7 +30,10 @@ export const contactUs = asyncHandler(async (req, res, next) => {
       message: 'Your request has been submitted successfully',
     });
 });
-
+/**
+ * @USER_STATS
+ * Fetches the statistics of the users (total users and active subscribers).
+ */
 export const userStats = asyncHandler(async (req, res, next) => {
     const allUsersCount = await User.countDocuments();
   

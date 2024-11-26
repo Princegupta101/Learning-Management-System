@@ -3,7 +3,10 @@ import jwt from 'jsonwebtoken';
 import { Schema,model } from "mongoose";
 
 import bcrypt from'bcryptjs';
-
+/**
+ * @userSchema - Mongoose schema for storing user details, including personal information, password, subscription, and role.
+ * The schema also includes methods for password encryption, JWT token generation, and password reset functionality.
+ */
 const userSchema= new Schema({
     fullName: {
         type:'String',

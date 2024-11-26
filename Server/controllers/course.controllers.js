@@ -6,7 +6,8 @@ import Course from "../models/course.model.js"
 import AppError from "../utils/error.util.js";
 
 /**
- * @ALL_COURSES
+ * @GET_ALL_COURSES
+ * Fetches all courses excluding lectures.
  */
 export const getAllCourse = asyncHandler(async (req, res, next)=>{
     try {
@@ -26,6 +27,7 @@ export const getAllCourse = asyncHandler(async (req, res, next)=>{
 });
 /**
  * @GET_LECTURES_BY_COURSE_ID
+ * Fetches lectures for a specific course.
  */
 export const getLecturesByCourseId = asyncHandler(async (req, res, next)=>{
     try {
@@ -54,6 +56,7 @@ export const getLecturesByCourseId = asyncHandler(async (req, res, next)=>{
 });
 /**
  * @CREATE_COURSE
+ * Creates a new course and optionally uploads a thumbnail image.
  */
 export const createCourse = asyncHandler(async (req, res, next)=>{
     const {title, description , category, createdBy}= req.body;
@@ -107,6 +110,7 @@ export const createCourse = asyncHandler(async (req, res, next)=>{
 });
 /**
  * @UPDATE_COURSE_BY_ID
+ * Updates an existing course by ID.
  */
 export const updateCourse = asyncHandler(async (req, res, next)=>{
     try {
@@ -139,6 +143,7 @@ export const updateCourse = asyncHandler(async (req, res, next)=>{
 });
 /**
  * @DELETE_COURSE_BY_ID
+ * Deletes a course by its ID.
  */
 export const removeCourse = asyncHandler(async (req, res, next)=>{
     try {
@@ -165,6 +170,7 @@ export const removeCourse = asyncHandler(async (req, res, next)=>{
 });
 /**
  * @ADD_LECTURE
+ * Adds a lecture to a course and uploads video to Cloudinary.
  */
 export const addLectureToCourseById= asyncHandler(async(req, res, next )=>{
     const { title, description} = req.body;
@@ -222,7 +228,8 @@ export const addLectureToCourseById= asyncHandler(async(req, res, next )=>{
 
 });
 /**
- * @Remove_LECTURE
+ * @REMOVE_LECTURE
+ * Removes a lecture from a course by its ID and deletes the video from Cloudinary.
  */
 export const removeLecture =asyncHandler( async(req, res, next )=>{
     try {

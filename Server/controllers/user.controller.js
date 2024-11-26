@@ -13,9 +13,8 @@ const cookieOptions = {
     secure: true
 };
 
-
 /**
- * @REGISTER
+ * @REGISTER - Registers a new user
  */
 export const register=asyncHandler(async(req,res,next)=>{
     const {fullName, email, password}= req.body;
@@ -83,10 +82,10 @@ export const register=asyncHandler(async(req,res,next)=>{
         user,
     });
 });
-/**
- * @LOGIN
- */
 
+/**
+ * @LOGIN - Logs in an existing user
+ */
 export const login=asyncHandler(async (req,res,next)=>{
 
     try {
@@ -127,7 +126,7 @@ export const login=asyncHandler(async (req,res,next)=>{
    
 });
 /**
- * @LOGOUT
+ * @LOGOUT - Logs out the user by clearing the token cookie
  */
 export const logout=asyncHandler(async(req,res,next)=>{
     res.cookie('token', null, {
@@ -142,7 +141,7 @@ export const logout=asyncHandler(async(req,res,next)=>{
     })
 });
 /**
- * @LOGGED_IN_USER_DETAILS
+ * @LOGGED_IN_USER_DETAILS - Fetches details of the logged-in user
  */
 export const getProfile=asyncHandler(async (req,res, next)=>{
     try {
@@ -160,7 +159,7 @@ export const getProfile=asyncHandler(async (req,res, next)=>{
 
 });
 /**
- * @FORGOT_PASSWORD
+ * @FORGOT_PASSWORD - Sends a password reset token to the user's email
  */
 export const forgotPassword=asyncHandler(async(req, res,next)=>{
 
@@ -203,7 +202,7 @@ export const forgotPassword=asyncHandler(async(req, res,next)=>{
     }
 });
 /**
- * @RESET_PASSWORD
+ * @RESET_PASSWORD - Resets the password using a valid token
  */
 export const resetPassword =asyncHandler(async(req, res,next )=>{
         const { resetToken}= req.params;
@@ -239,7 +238,7 @@ export const resetPassword =asyncHandler(async(req, res,next )=>{
         })
 });
 /**
- * @CHANGE_PASSWORD
+ * @CHANGE_PASSWORD - Changes the current password for the logged-in user
  */
 export const changePassword =asyncHandler(async(req, res, next)=>{
     const { oldPassword, newPassword}= req.body;
@@ -272,7 +271,7 @@ export const changePassword =asyncHandler(async(req, res, next)=>{
     })
 })
 /**
- * @UPDATE_USER
+ * @UPDATE_USER - Updates the user details (name and avatar)
  */
 export const updateUser=asyncHandler(async(req, res,next)=>{
 
