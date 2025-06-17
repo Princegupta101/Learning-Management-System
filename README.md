@@ -29,6 +29,23 @@ The Learning Management System (LMS) is a web-based application that facilitates
 - Interactive user interface using React and Tailwind CSS
 - Subscription management with Razorpay (for premium content)
 
+## Admin Login Credentials
+
+By default, the LMS comes with an admin account. Use the following credentials to log in:
+
+- **Email-1:** `adminDemo@gmail.com`
+- **Password-1:** `123456789@Lms`
+
+- **Email-2:** `adminDemo2@gmail.com`
+- **Password-2:** `123456789@Lms`
+  
+## User Login Credentials
+
+By default, the LMS comes with an admin account. Use the following credentials to log in:
+
+- **Email-1:** `user1@gmail.com`
+- **Password-1:** `123456789@Lms`
+
 ## Installation
 
  Clone the project 
