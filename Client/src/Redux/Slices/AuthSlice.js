@@ -4,9 +4,9 @@ import toast from "react-hot-toast";
 import axiosInstance from "../../Helpers/axiosinstance"
 
 const initialState = {
-  isLoggedIn: localStorage.getItem("isLoggedIn") === "true" || false,
-  role: localStorage.getItem("role") || "",
-  data: JSON.parse(localStorage.getItem("data") || "{}") || {},
+  isLoggedIn: typeof window !== "undefined" ? localStorage.getItem("isLoggedIn") === "true" || false : false,
+  role: typeof window !== "undefined" ? localStorage.getItem("role") || "" : "",
+  data: typeof window !== "undefined" ? JSON.parse(localStorage.getItem("data") || "{}") || {} : {},
 };
 
 export const creatAccount =createAsyncThunk("/auth/singup", async(data)=>{
