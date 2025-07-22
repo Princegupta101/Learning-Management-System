@@ -3,11 +3,22 @@ import toast from "react-hot-toast";
 
 import axiosInstance from "../../Helpers/axiosinstance"
 
-const initialState = {
-  isLoggedIn: typeof window !== "undefined" ? localStorage.getItem("isLoggedIn") === "true" || false : false,
-  role: typeof window !== "undefined" ? localStorage.getItem("role") || "" : "",
-  data: typeof window !== "undefined" ? JSON.parse(localStorage.getItem("data") || "{}") || {} : {},
+const isBrowser = typeof window !== "undefined";
+
+const safeParse = (value, fallback) => {
+  try {
+    return JSON.parse(value);
+  } catch {
+    return fallback;
+  }
 };
+
+const initialState = {
+  isLoggedIn: isBrowser ? localStorage.getItem("isLoggedIn") === "true" : false,
+  role: isBrowser ? localStorage.getItem("role") || "" : "",
+  data: isBrowser ? safeParse(localStorage.getItem("data"), {}) : {},
+};
+
 
 export const creatAccount =createAsyncThunk("/auth/singup", async(data)=>{
     try {
