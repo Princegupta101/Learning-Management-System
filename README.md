@@ -33,11 +33,8 @@ The Learning Management System (LMS) is a web-based application that facilitates
 
 By default, the LMS comes with an admin account. Use the following credentials to log in:
 
-- **Email-1:** `adminDemo@gmail.com`
+- **Email-1:** `pgupta49@gmail.com`
 - **Password-1:** `123456789@Lms`
-
-- **Email-2:** `adminDemo2@gmail.com`
-- **Password-2:** `123456789@Lms`
   
 ## User Login Credentials
 
