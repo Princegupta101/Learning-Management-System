@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {toast} from 'react-hot-toast'
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ function Login(){
         email:"",
         password:"",
     });
+    const lastAttemptRef = useRef(0);
 
     function handleUserInput(e){
         const{name, value}=e.target;
@@ -27,6 +28,10 @@ function Login(){
 
    async function onLogin(event){
         event.preventDefault();
+    // simple debounce: ignore repeated clicks within 800ms
+    const now = Date.now();
+    if (now - lastAttemptRef.current < 800) return;
+    lastAttemptRef.current = now;
         if (!loginData.email || !loginData.password) {
             toast.error("Please fill all the details ");
             return;
@@ -34,7 +39,16 @@ function Login(){
 
 
         //dispatch create account action
-       const response = await dispatch(login(loginData));
+       try {
+        const response = await dispatch(login(loginData));
+        if (response.error) {
+            const msg = response.payload?.message || response.error?.message || "Invalid email or password. Please try again or register.";
+            const toastId = "login-error";
+            // update or create single toast with the same id so it doesn't stack
+            toast.error(msg, { id: toastId, duration: 2000 });
+            return;
+        }
+
         if(response?.payload?.success){
             navigate("/");
             setloginData({
@@ -42,6 +56,9 @@ function Login(){
                 password:"",
             })
         }
+             } finally {
+                 // nothing to do here; button remains clickable
+             }
     }
     return(
         <HomeLayout>
@@ -77,9 +94,9 @@ function Login(){
                              />
                         </div>
 
-                        <button  type="submit" className=" mt-2 bg-yellow-600 hover:bg-yellow-500 py-2 font-semibold text-lg cursor-pointer transition-all ease-in-out duration-300  rounded-sm">
-                                Login
-                        </button>
+            <button type="submit" className={` mt-2 bg-yellow-600 hover:bg-yellow-500 py-2 font-semibold text-lg cursor-pointer transition-all ease-in-out duration-300  rounded-sm`}>
+                Login
+            </button>
 
                         <Link to={"/forget-password"}>
                             <p className="text-center link text-accent cursor-pointer">

@@ -20,7 +20,7 @@ export const register=asyncHandler(async(req,res,next)=>{
     const {fullName, email, password}= req.body;
 
     if(!fullName|| !email|| !password){
-        return next(new AppError('All fileds are  required ', 400));
+        return next(new AppError('Full name, email and password are required', 400));
     }
 
     const userExists = await User.findOne({email});
@@ -101,8 +101,9 @@ export const login=asyncHandler(async (req,res,next)=>{
         }).select('+password');
     
         if(!(user &&(await user.comparePassword(password)))){
+            // authentication failure should return 401 Unauthorized and a concise message
             return next(
-                new AppError('Email or password does not match ', 400)
+                new AppError('Invalid email or password', 401)
             );
         }
     
