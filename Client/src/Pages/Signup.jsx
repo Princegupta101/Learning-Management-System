@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {toast} from 'react-hot-toast'
-import { BsPersonCircle } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { BsPersonCircle } from "react-icons/bs";
 
 import { isEmail, isPassword } from "../Helpers/regexMatcher";
 import HomeLayout from "../Layouts/HomeLayout";
@@ -22,6 +22,7 @@ function Signup(){
         password:"",
         avatar:"",
     });
+    const lastAttemptRef = useRef(0);
 
     function handleUserInput(e){
         const{name, value}=e.target;
@@ -52,11 +53,16 @@ function Signup(){
     }
 
    async function createNewAccount(event){
-        event.preventDefault();
-        if (!signupData.email ||!signupData.fullName||!signupData.avatar || !signupData.password) {
-            toast.error("Please fill all the details ");
-            return;
-        }
+       event.preventDefault();
+       // simple debounce: ignore repeated clicks within 800ms
+       const now = Date.now();
+       if (now - lastAttemptRef.current < 800) return;
+       lastAttemptRef.current = now;
+       // avatar should be optional; do not require it on client side
+       if (!signupData.email ||!signupData.fullName|| !signupData.password) {
+          toast.error("Please fill all the details ");
+          return;
+       }
 
         //checking name filed 
         if(signupData.fullName.length<5){
@@ -83,8 +89,15 @@ function Signup(){
         formData.append("avatar", signupData.avatar);
 
 
-        //dispatch create account action
-       const response = await dispatch(creatAccount(formData));
+        const response = await dispatch(creatAccount(formData));
+        if (response.error) {
+            const msg = response.payload?.message || response.error?.message || "Registration failed. Please try again.";
+            const toastId = "signup-error";
+            // show or replace a single toast with same id so it doesn't stack
+            toast.error(msg, { id: toastId, duration: 2000 });
+            return;
+        }
+
         if(response?.payload?.success){
             navigate("/");
             setSignupData({
@@ -158,9 +171,9 @@ function Signup(){
                                 value={signupData.password}
                              />
                         </div>
-                        <button  type="submit" className=" mt-2 bg-yellow-600 hover:bg-yellow-500 py-2 font-semibold text-lg cursor-pointer transition-all ease-in-out duration-300  rounded-sm">
-                                Create Account
-                        </button>
+            <button type="submit" className={` mt-2 bg-yellow-600 hover:bg-yellow-500 py-2 font-semibold text-lg cursor-pointer transition-all ease-in-out duration-300  rounded-sm`}>
+                Create Account
+            </button>
                         <p className="text-center">
                             Already have an account ? <Link to="/login" className=" link  text-accent cursor-pointer">Login</Link>
                         </p>

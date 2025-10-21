@@ -20,39 +20,30 @@ const initialState = {
 };
 
 
-export const creatAccount =createAsyncThunk("/auth/singup", async(data)=>{
-    try {
-        const res =axiosInstance.post("user/register", data);
-        toast.promise(res,{
-            loading:"wait creating your account",
-            success:(data)=>{
-                return data?.data?.message;
-            },
-            error:"Failed in create account"
-        })
-        return(await res).data;
-        
-    } catch (error) {
-        toast.error(error?.response?.data?.message);
+export const creatAccount = createAsyncThunk(
+    "/auth/singup",
+    async (data, { rejectWithValue }) => {
+        try {
+            const res = await axiosInstance.post("user/register", data);
+            return res.data;
+        } catch (error) {
+            // return a structured error so callers can act on it
+            return rejectWithValue(error?.response?.data || { message: error.message });
+        }
     }
-})
+);
 
-export const login =createAsyncThunk("/auth/login", async(data)=>{
-    try {
-        const res =axiosInstance.post("user/login", data);
-        toast.promise(res,{
-            loading:"wait authentication in process..... ",
-            success:(data)=>{
-                return data?.data?.message;
-            },
-            error:"Failed to login"
-        })
-        return(await res).data;
-        
-    } catch (error) {
-        toast.error(error?.response?.data?.message);
+export const login = createAsyncThunk(
+    "/auth/login",
+    async (data, { rejectWithValue }) => {
+        try {
+            const res = await axiosInstance.post("user/login", data);
+            return res.data;
+        } catch (error) {
+            return rejectWithValue(error?.response?.data || { message: error.message });
+        }
     }
-})
+);
 
 export const logout=createAsyncThunk("/auth/logout", async ()=>{
     try {

@@ -12,8 +12,8 @@ import store from './Redux/store.js';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
-      <Toaster/>
+  <App />
+  <Toaster toastOptions={{ duration: 2000 }} />
     </BrowserRouter>
   </Provider>
 )
