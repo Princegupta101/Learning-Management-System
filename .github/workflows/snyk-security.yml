@@ -1,0 +1,33 @@
+name: Snyk Security Scan
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  snyk-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Snyk CLI
+        uses: snyk/actions/setup@master
+
+      # 1. This step scans the repo. 
+      # It will fail (block PR) only for High/Critical issues.
+      # Low/Medium will be reported but won't stop the build.
+      - name: Snyk Test (Gatekeeper)
+        run: snyk test --severity-threshold=high
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # 2. This step pushes the snapshot to your Snyk Dashboard
+      # This ensures you don't have to import the project manually.
+      - name: Snyk Monitor (Dashboard Sync)
+        if: always() # Ensures sync happens even if the test fails
+        run: snyk monitor
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
